@@ -1,0 +1,1042 @@
+import type * as runtime from "@prisma/client/runtime/library";
+import type * as Prisma from "../internal/prismaNamespace.js";
+/**
+ * Model GoodCategory
+ *
+ */
+export type GoodCategoryModel = runtime.Types.Result.DefaultSelection<Prisma.$GoodCategoryPayload>;
+export type AggregateGoodCategory = {
+    _count: GoodCategoryCountAggregateOutputType | null;
+    _avg: GoodCategoryAvgAggregateOutputType | null;
+    _sum: GoodCategorySumAggregateOutputType | null;
+    _min: GoodCategoryMinAggregateOutputType | null;
+    _max: GoodCategoryMaxAggregateOutputType | null;
+};
+export type GoodCategoryAvgAggregateOutputType = {
+    id: number | null;
+    parentId: number | null;
+};
+export type GoodCategorySumAggregateOutputType = {
+    id: number | null;
+    parentId: number | null;
+};
+export type GoodCategoryMinAggregateOutputType = {
+    id: number | null;
+    title: string | null;
+    description: string | null;
+    parentId: number | null;
+    createdAt: Date | null;
+};
+export type GoodCategoryMaxAggregateOutputType = {
+    id: number | null;
+    title: string | null;
+    description: string | null;
+    parentId: number | null;
+    createdAt: Date | null;
+};
+export type GoodCategoryCountAggregateOutputType = {
+    id: number;
+    title: number;
+    description: number;
+    parentId: number;
+    createdAt: number;
+    _all: number;
+};
+export type GoodCategoryAvgAggregateInputType = {
+    id?: true;
+    parentId?: true;
+};
+export type GoodCategorySumAggregateInputType = {
+    id?: true;
+    parentId?: true;
+};
+export type GoodCategoryMinAggregateInputType = {
+    id?: true;
+    title?: true;
+    description?: true;
+    parentId?: true;
+    createdAt?: true;
+};
+export type GoodCategoryMaxAggregateInputType = {
+    id?: true;
+    title?: true;
+    description?: true;
+    parentId?: true;
+    createdAt?: true;
+};
+export type GoodCategoryCountAggregateInputType = {
+    id?: true;
+    title?: true;
+    description?: true;
+    parentId?: true;
+    createdAt?: true;
+    _all?: true;
+};
+export type GoodCategoryAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoodCategory to aggregate.
+     */
+    where?: Prisma.GoodCategoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of GoodCategories to fetch.
+     */
+    orderBy?: Prisma.GoodCategoryOrderByWithRelationInput | Prisma.GoodCategoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: Prisma.GoodCategoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` GoodCategories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` GoodCategories.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned GoodCategories
+    **/
+    _count?: true | GoodCategoryCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+    **/
+    _avg?: GoodCategoryAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+    **/
+    _sum?: GoodCategorySumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: GoodCategoryMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: GoodCategoryMaxAggregateInputType;
+};
+export type GetGoodCategoryAggregateType<T extends GoodCategoryAggregateArgs> = {
+    [P in keyof T & keyof AggregateGoodCategory]: P extends '_count' | 'count' ? T[P] extends true ? number : Prisma.GetScalarType<T[P], AggregateGoodCategory[P]> : Prisma.GetScalarType<T[P], AggregateGoodCategory[P]>;
+};
+export type GoodCategoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.GoodCategoryWhereInput;
+    orderBy?: Prisma.GoodCategoryOrderByWithAggregationInput | Prisma.GoodCategoryOrderByWithAggregationInput[];
+    by: Prisma.GoodCategoryScalarFieldEnum[] | Prisma.GoodCategoryScalarFieldEnum;
+    having?: Prisma.GoodCategoryScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: GoodCategoryCountAggregateInputType | true;
+    _avg?: GoodCategoryAvgAggregateInputType;
+    _sum?: GoodCategorySumAggregateInputType;
+    _min?: GoodCategoryMinAggregateInputType;
+    _max?: GoodCategoryMaxAggregateInputType;
+};
+export type GoodCategoryGroupByOutputType = {
+    id: number;
+    title: string;
+    description: string;
+    parentId: number | null;
+    createdAt: Date;
+    _count: GoodCategoryCountAggregateOutputType | null;
+    _avg: GoodCategoryAvgAggregateOutputType | null;
+    _sum: GoodCategorySumAggregateOutputType | null;
+    _min: GoodCategoryMinAggregateOutputType | null;
+    _max: GoodCategoryMaxAggregateOutputType | null;
+};
+type GetGoodCategoryGroupByPayload<T extends GoodCategoryGroupByArgs> = Prisma.PrismaPromise<Array<Prisma.PickEnumerable<GoodCategoryGroupByOutputType, T['by']> & {
+    [P in ((keyof T) & (keyof GoodCategoryGroupByOutputType))]: P extends '_count' ? T[P] extends boolean ? number : Prisma.GetScalarType<T[P], GoodCategoryGroupByOutputType[P]> : Prisma.GetScalarType<T[P], GoodCategoryGroupByOutputType[P]>;
+}>>;
+export type GoodCategoryWhereInput = {
+    AND?: Prisma.GoodCategoryWhereInput | Prisma.GoodCategoryWhereInput[];
+    OR?: Prisma.GoodCategoryWhereInput[];
+    NOT?: Prisma.GoodCategoryWhereInput | Prisma.GoodCategoryWhereInput[];
+    id?: Prisma.IntFilter<"GoodCategory"> | number;
+    title?: Prisma.StringFilter<"GoodCategory"> | string;
+    description?: Prisma.StringFilter<"GoodCategory"> | string;
+    parentId?: Prisma.IntNullableFilter<"GoodCategory"> | number | null;
+    createdAt?: Prisma.DateTimeFilter<"GoodCategory"> | Date | string;
+};
+export type GoodCategoryOrderByWithRelationInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    parentId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type GoodCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number;
+    AND?: Prisma.GoodCategoryWhereInput | Prisma.GoodCategoryWhereInput[];
+    OR?: Prisma.GoodCategoryWhereInput[];
+    NOT?: Prisma.GoodCategoryWhereInput | Prisma.GoodCategoryWhereInput[];
+    title?: Prisma.StringFilter<"GoodCategory"> | string;
+    description?: Prisma.StringFilter<"GoodCategory"> | string;
+    parentId?: Prisma.IntNullableFilter<"GoodCategory"> | number | null;
+    createdAt?: Prisma.DateTimeFilter<"GoodCategory"> | Date | string;
+}, "id">;
+export type GoodCategoryOrderByWithAggregationInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    parentId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    _count?: Prisma.GoodCategoryCountOrderByAggregateInput;
+    _avg?: Prisma.GoodCategoryAvgOrderByAggregateInput;
+    _max?: Prisma.GoodCategoryMaxOrderByAggregateInput;
+    _min?: Prisma.GoodCategoryMinOrderByAggregateInput;
+    _sum?: Prisma.GoodCategorySumOrderByAggregateInput;
+};
+export type GoodCategoryScalarWhereWithAggregatesInput = {
+    AND?: Prisma.GoodCategoryScalarWhereWithAggregatesInput | Prisma.GoodCategoryScalarWhereWithAggregatesInput[];
+    OR?: Prisma.GoodCategoryScalarWhereWithAggregatesInput[];
+    NOT?: Prisma.GoodCategoryScalarWhereWithAggregatesInput | Prisma.GoodCategoryScalarWhereWithAggregatesInput[];
+    id?: Prisma.IntWithAggregatesFilter<"GoodCategory"> | number;
+    title?: Prisma.StringWithAggregatesFilter<"GoodCategory"> | string;
+    description?: Prisma.StringWithAggregatesFilter<"GoodCategory"> | string;
+    parentId?: Prisma.IntNullableWithAggregatesFilter<"GoodCategory"> | number | null;
+    createdAt?: Prisma.DateTimeWithAggregatesFilter<"GoodCategory"> | Date | string;
+};
+export type GoodCategoryCreateInput = {
+    title: string;
+    description: string;
+    parentId?: number | null;
+    createdAt?: Date | string;
+};
+export type GoodCategoryUncheckedCreateInput = {
+    id?: number;
+    title: string;
+    description: string;
+    parentId?: number | null;
+    createdAt?: Date | string;
+};
+export type GoodCategoryUpdateInput = {
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.StringFieldUpdateOperationsInput | string;
+    parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type GoodCategoryUncheckedUpdateInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.StringFieldUpdateOperationsInput | string;
+    parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type GoodCategoryCreateManyInput = {
+    id?: number;
+    title: string;
+    description: string;
+    parentId?: number | null;
+    createdAt?: Date | string;
+};
+export type GoodCategoryUpdateManyMutationInput = {
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.StringFieldUpdateOperationsInput | string;
+    parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type GoodCategoryUncheckedUpdateManyInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.StringFieldUpdateOperationsInput | string;
+    parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type GoodCategoryCountOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    parentId?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type GoodCategoryAvgOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    parentId?: Prisma.SortOrder;
+};
+export type GoodCategoryMaxOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    parentId?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type GoodCategoryMinOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    title?: Prisma.SortOrder;
+    description?: Prisma.SortOrder;
+    parentId?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type GoodCategorySumOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    parentId?: Prisma.SortOrder;
+};
+export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null;
+    increment?: number;
+    decrement?: number;
+    multiply?: number;
+    divide?: number;
+};
+export type GoodCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    parentId?: boolean;
+    createdAt?: boolean;
+}, ExtArgs["result"]["goodCategory"]>;
+export type GoodCategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    parentId?: boolean;
+    createdAt?: boolean;
+}, ExtArgs["result"]["goodCategory"]>;
+export type GoodCategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    parentId?: boolean;
+    createdAt?: boolean;
+}, ExtArgs["result"]["goodCategory"]>;
+export type GoodCategorySelectScalar = {
+    id?: boolean;
+    title?: boolean;
+    description?: boolean;
+    parentId?: boolean;
+    createdAt?: boolean;
+};
+export type GoodCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "parentId" | "createdAt", ExtArgs["result"]["goodCategory"]>;
+export type $GoodCategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    name: "GoodCategory";
+    objects: {};
+    scalars: runtime.Types.Extensions.GetPayloadResult<{
+        id: number;
+        title: string;
+        description: string;
+        parentId: number | null;
+        createdAt: Date;
+    }, ExtArgs["result"]["goodCategory"]>;
+    composites: {};
+};
+export type GoodCategoryGetPayload<S extends boolean | null | undefined | GoodCategoryDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload, S>;
+export type GoodCategoryCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = Omit<GoodCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: GoodCategoryCountAggregateInputType | true;
+};
+export interface GoodCategoryDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: {
+        types: Prisma.TypeMap<ExtArgs>['model']['GoodCategory'];
+        meta: {
+            name: 'GoodCategory';
+        };
+    };
+    /**
+     * Find zero or one GoodCategory that matches the filter.
+     * @param {GoodCategoryFindUniqueArgs} args - Arguments to find a GoodCategory
+     * @example
+     * // Get one GoodCategory
+     * const goodCategory = await prisma.goodCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GoodCategoryFindUniqueArgs>(args: Prisma.SelectSubset<T, GoodCategoryFindUniqueArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one GoodCategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GoodCategoryFindUniqueOrThrowArgs} args - Arguments to find a GoodCategory
+     * @example
+     * // Get one GoodCategory
+     * const goodCategory = await prisma.goodCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GoodCategoryFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, GoodCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first GoodCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodCategoryFindFirstArgs} args - Arguments to find a GoodCategory
+     * @example
+     * // Get one GoodCategory
+     * const goodCategory = await prisma.goodCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GoodCategoryFindFirstArgs>(args?: Prisma.SelectSubset<T, GoodCategoryFindFirstArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first GoodCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodCategoryFindFirstOrThrowArgs} args - Arguments to find a GoodCategory
+     * @example
+     * // Get one GoodCategory
+     * const goodCategory = await prisma.goodCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GoodCategoryFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, GoodCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more GoodCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GoodCategories
+     * const goodCategories = await prisma.goodCategory.findMany()
+     *
+     * // Get first 10 GoodCategories
+     * const goodCategories = await prisma.goodCategory.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const goodCategoryWithIdOnly = await prisma.goodCategory.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends GoodCategoryFindManyArgs>(args?: Prisma.SelectSubset<T, GoodCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a GoodCategory.
+     * @param {GoodCategoryCreateArgs} args - Arguments to create a GoodCategory.
+     * @example
+     * // Create one GoodCategory
+     * const GoodCategory = await prisma.goodCategory.create({
+     *   data: {
+     *     // ... data to create a GoodCategory
+     *   }
+     * })
+     *
+     */
+    create<T extends GoodCategoryCreateArgs>(args: Prisma.SelectSubset<T, GoodCategoryCreateArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many GoodCategories.
+     * @param {GoodCategoryCreateManyArgs} args - Arguments to create many GoodCategories.
+     * @example
+     * // Create many GoodCategories
+     * const goodCategory = await prisma.goodCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends GoodCategoryCreateManyArgs>(args?: Prisma.SelectSubset<T, GoodCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many GoodCategories and returns the data saved in the database.
+     * @param {GoodCategoryCreateManyAndReturnArgs} args - Arguments to create many GoodCategories.
+     * @example
+     * // Create many GoodCategories
+     * const goodCategory = await prisma.goodCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many GoodCategories and only return the `id`
+     * const goodCategoryWithIdOnly = await prisma.goodCategory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends GoodCategoryCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, GoodCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a GoodCategory.
+     * @param {GoodCategoryDeleteArgs} args - Arguments to delete one GoodCategory.
+     * @example
+     * // Delete one GoodCategory
+     * const GoodCategory = await prisma.goodCategory.delete({
+     *   where: {
+     *     // ... filter to delete one GoodCategory
+     *   }
+     * })
+     *
+     */
+    delete<T extends GoodCategoryDeleteArgs>(args: Prisma.SelectSubset<T, GoodCategoryDeleteArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one GoodCategory.
+     * @param {GoodCategoryUpdateArgs} args - Arguments to update one GoodCategory.
+     * @example
+     * // Update one GoodCategory
+     * const goodCategory = await prisma.goodCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends GoodCategoryUpdateArgs>(args: Prisma.SelectSubset<T, GoodCategoryUpdateArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more GoodCategories.
+     * @param {GoodCategoryDeleteManyArgs} args - Arguments to filter GoodCategories to delete.
+     * @example
+     * // Delete a few GoodCategories
+     * const { count } = await prisma.goodCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends GoodCategoryDeleteManyArgs>(args?: Prisma.SelectSubset<T, GoodCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more GoodCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GoodCategories
+     * const goodCategory = await prisma.goodCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends GoodCategoryUpdateManyArgs>(args: Prisma.SelectSubset<T, GoodCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more GoodCategories and returns the data updated in the database.
+     * @param {GoodCategoryUpdateManyAndReturnArgs} args - Arguments to update many GoodCategories.
+     * @example
+     * // Update many GoodCategories
+     * const goodCategory = await prisma.goodCategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more GoodCategories and only return the `id`
+     * const goodCategoryWithIdOnly = await prisma.goodCategory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends GoodCategoryUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, GoodCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one GoodCategory.
+     * @param {GoodCategoryUpsertArgs} args - Arguments to update or create a GoodCategory.
+     * @example
+     * // Update or create a GoodCategory
+     * const goodCategory = await prisma.goodCategory.upsert({
+     *   create: {
+     *     // ... data to create a GoodCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GoodCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GoodCategoryUpsertArgs>(args: Prisma.SelectSubset<T, GoodCategoryUpsertArgs<ExtArgs>>): Prisma.Prisma__GoodCategoryClient<runtime.Types.Result.GetResult<Prisma.$GoodCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of GoodCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodCategoryCountArgs} args - Arguments to filter GoodCategories to count.
+     * @example
+     * // Count the number of GoodCategories
+     * const count = await prisma.goodCategory.count({
+     *   where: {
+     *     // ... the filter for the GoodCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends GoodCategoryCountArgs>(args?: Prisma.Subset<T, GoodCategoryCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], GoodCategoryCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a GoodCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GoodCategoryAggregateArgs>(args: Prisma.Subset<T, GoodCategoryAggregateArgs>): Prisma.PrismaPromise<GetGoodCategoryAggregateType<T>>;
+    /**
+     * Group by GoodCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoodCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<T extends GoodCategoryGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
+        orderBy: GoodCategoryGroupByArgs['orderBy'];
+    } : {
+        orderBy?: GoodCategoryGroupByArgs['orderBy'];
+    }, OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>, ByFields extends Prisma.MaybeTupleToUnion<T['by']>, ByValid extends Prisma.Has<ByFields, OrderFields>, HavingFields extends Prisma.GetHavingFields<T['having']>, HavingValid extends Prisma.Has<ByFields, HavingFields>, ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False, InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.` : HavingValid extends Prisma.False ? {
+        [P in HavingFields]: P extends ByFields ? never : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".` : [
+            Error,
+            'Field ',
+            P,
+            ` in "having" needs to be provided in "by"`
+        ];
+    }[HavingFields] : 'take' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "take", you also need to provide "orderBy"' : 'skip' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields]>(args: Prisma.SubsetIntersection<T, GoodCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGoodCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the GoodCategory model
+     */
+    readonly fields: GoodCategoryFieldRefs;
+}
+/**
+ * The delegate class that acts as a "Promise-like" for GoodCategory.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export interface Prisma__GoodCategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
+}
+/**
+ * Fields of the GoodCategory model
+ */
+export interface GoodCategoryFieldRefs {
+    readonly id: Prisma.FieldRef<"GoodCategory", 'Int'>;
+    readonly title: Prisma.FieldRef<"GoodCategory", 'String'>;
+    readonly description: Prisma.FieldRef<"GoodCategory", 'String'>;
+    readonly parentId: Prisma.FieldRef<"GoodCategory", 'Int'>;
+    readonly createdAt: Prisma.FieldRef<"GoodCategory", 'DateTime'>;
+}
+/**
+ * GoodCategory findUnique
+ */
+export type GoodCategoryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * Filter, which GoodCategory to fetch.
+     */
+    where: Prisma.GoodCategoryWhereUniqueInput;
+};
+/**
+ * GoodCategory findUniqueOrThrow
+ */
+export type GoodCategoryFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * Filter, which GoodCategory to fetch.
+     */
+    where: Prisma.GoodCategoryWhereUniqueInput;
+};
+/**
+ * GoodCategory findFirst
+ */
+export type GoodCategoryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * Filter, which GoodCategory to fetch.
+     */
+    where?: Prisma.GoodCategoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of GoodCategories to fetch.
+     */
+    orderBy?: Prisma.GoodCategoryOrderByWithRelationInput | Prisma.GoodCategoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for GoodCategories.
+     */
+    cursor?: Prisma.GoodCategoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` GoodCategories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` GoodCategories.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of GoodCategories.
+     */
+    distinct?: Prisma.GoodCategoryScalarFieldEnum | Prisma.GoodCategoryScalarFieldEnum[];
+};
+/**
+ * GoodCategory findFirstOrThrow
+ */
+export type GoodCategoryFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * Filter, which GoodCategory to fetch.
+     */
+    where?: Prisma.GoodCategoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of GoodCategories to fetch.
+     */
+    orderBy?: Prisma.GoodCategoryOrderByWithRelationInput | Prisma.GoodCategoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for GoodCategories.
+     */
+    cursor?: Prisma.GoodCategoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` GoodCategories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` GoodCategories.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of GoodCategories.
+     */
+    distinct?: Prisma.GoodCategoryScalarFieldEnum | Prisma.GoodCategoryScalarFieldEnum[];
+};
+/**
+ * GoodCategory findMany
+ */
+export type GoodCategoryFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * Filter, which GoodCategories to fetch.
+     */
+    where?: Prisma.GoodCategoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of GoodCategories to fetch.
+     */
+    orderBy?: Prisma.GoodCategoryOrderByWithRelationInput | Prisma.GoodCategoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing GoodCategories.
+     */
+    cursor?: Prisma.GoodCategoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` GoodCategories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` GoodCategories.
+     */
+    skip?: number;
+    distinct?: Prisma.GoodCategoryScalarFieldEnum | Prisma.GoodCategoryScalarFieldEnum[];
+};
+/**
+ * GoodCategory create
+ */
+export type GoodCategoryCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * The data needed to create a GoodCategory.
+     */
+    data: Prisma.XOR<Prisma.GoodCategoryCreateInput, Prisma.GoodCategoryUncheckedCreateInput>;
+};
+/**
+ * GoodCategory createMany
+ */
+export type GoodCategoryCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GoodCategories.
+     */
+    data: Prisma.GoodCategoryCreateManyInput | Prisma.GoodCategoryCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * GoodCategory createManyAndReturn
+ */
+export type GoodCategoryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * The data used to create many GoodCategories.
+     */
+    data: Prisma.GoodCategoryCreateManyInput | Prisma.GoodCategoryCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * GoodCategory update
+ */
+export type GoodCategoryUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * The data needed to update a GoodCategory.
+     */
+    data: Prisma.XOR<Prisma.GoodCategoryUpdateInput, Prisma.GoodCategoryUncheckedUpdateInput>;
+    /**
+     * Choose, which GoodCategory to update.
+     */
+    where: Prisma.GoodCategoryWhereUniqueInput;
+};
+/**
+ * GoodCategory updateMany
+ */
+export type GoodCategoryUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GoodCategories.
+     */
+    data: Prisma.XOR<Prisma.GoodCategoryUpdateManyMutationInput, Prisma.GoodCategoryUncheckedUpdateManyInput>;
+    /**
+     * Filter which GoodCategories to update
+     */
+    where?: Prisma.GoodCategoryWhereInput;
+    /**
+     * Limit how many GoodCategories to update.
+     */
+    limit?: number;
+};
+/**
+ * GoodCategory updateManyAndReturn
+ */
+export type GoodCategoryUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * The data used to update GoodCategories.
+     */
+    data: Prisma.XOR<Prisma.GoodCategoryUpdateManyMutationInput, Prisma.GoodCategoryUncheckedUpdateManyInput>;
+    /**
+     * Filter which GoodCategories to update
+     */
+    where?: Prisma.GoodCategoryWhereInput;
+    /**
+     * Limit how many GoodCategories to update.
+     */
+    limit?: number;
+};
+/**
+ * GoodCategory upsert
+ */
+export type GoodCategoryUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * The filter to search for the GoodCategory to update in case it exists.
+     */
+    where: Prisma.GoodCategoryWhereUniqueInput;
+    /**
+     * In case the GoodCategory found by the `where` argument doesn't exist, create a new GoodCategory with this data.
+     */
+    create: Prisma.XOR<Prisma.GoodCategoryCreateInput, Prisma.GoodCategoryUncheckedCreateInput>;
+    /**
+     * In case the GoodCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: Prisma.XOR<Prisma.GoodCategoryUpdateInput, Prisma.GoodCategoryUncheckedUpdateInput>;
+};
+/**
+ * GoodCategory delete
+ */
+export type GoodCategoryDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+    /**
+     * Filter which GoodCategory to delete.
+     */
+    where: Prisma.GoodCategoryWhereUniqueInput;
+};
+/**
+ * GoodCategory deleteMany
+ */
+export type GoodCategoryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoodCategories to delete
+     */
+    where?: Prisma.GoodCategoryWhereInput;
+    /**
+     * Limit how many GoodCategories to delete.
+     */
+    limit?: number;
+};
+/**
+ * GoodCategory without action
+ */
+export type GoodCategoryDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoodCategory
+     */
+    select?: Prisma.GoodCategorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the GoodCategory
+     */
+    omit?: Prisma.GoodCategoryOmit<ExtArgs> | null;
+};
+export {};
+//# sourceMappingURL=GoodCategory.d.ts.map
