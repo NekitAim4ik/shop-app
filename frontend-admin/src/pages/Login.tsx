@@ -1,33 +1,20 @@
 import { useState, type FormEvent } from "react";
+import { useSendOtpMutation } from "../services/api";
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+
+    const [sendOtp, { isLoading, error }] = useSendOtpMutation();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError('');
-        setIsLoading(true);
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if(!emailRegex.test(email)) {
-            setError('Пожалуйста, введите корректный email')
-            setIsLoading(false)
-            return
-        }
 
         try {
-            console.log('Отправка OTP на email:', email);
-
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-             alert(`OTP код отправлен на ${email}`);
-        } catch {
-            setError('Произошла ошибка. Попробуйте снова.');
-        } finally {
-            setIsLoading(false)
+          const result = await sendOtp({email}).unwrap();
+          console.log('Успешно:', result);
+        } catch (err) {
+            console.error('Ошибка:', err)
         }
     };
 
@@ -58,7 +45,7 @@ const Login = () => {
 
           {error && (
             <div className="error-message">
-              {error}
+              Произошла ошибка при отправке кода
             </div>
           )}
 
