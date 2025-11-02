@@ -1,17 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-interface ILoginBody {
-    email: string
-}
-
-interface ILoginResponseBody {
-    message: string
-}
+import type { ILoginBody, ILoginResponseBody, ILoginConfigmBody, ILoginConfirmResponseBody } from "../dto/IAuth";
 
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
         baseUrl: '/api/v1',
+        credentials: 'include',
         prepareHeaders: (headers) => {
             const token = localStorage.getItem('accessToken');
             if (token) {
@@ -32,9 +26,18 @@ export const api = createApi({
             }),
         }),
 
+        confirmOtp: builder.mutation<ILoginConfirmResponseBody, ILoginConfigmBody>({
+            query: (credentials) => ({
+                url: '/auth/confirm/',
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
+
     }),
 });
 
 export const {
-    useSendOtpMutation
+    useSendOtpMutation,
+    useConfirmOtpMutation
 } = api;

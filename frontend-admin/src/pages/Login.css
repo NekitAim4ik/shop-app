@@ -100,3 +100,21 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.back-button {
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #667eea;
+  background: transparent;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 12px;
+}
+
+.back-button:hover {
+  background: #667eea;
+  color: white;
+}
