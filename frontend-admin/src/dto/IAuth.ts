@@ -12,5 +12,5 @@ export interface ILoginConfigmBody {
 }
 
 export interface ILoginConfirmResponseBody {
-    access: string
+    accessToken: string
 }

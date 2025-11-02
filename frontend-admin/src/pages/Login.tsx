@@ -1,5 +1,6 @@
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, useEffect } from "react";
 import { useSendOtpMutation, useConfirmOtpMutation } from "../services/api";
+import { useNavigate } from "react-router-dom";
 import './Login.css';
 
 const Login = () => {
@@ -7,8 +8,18 @@ const Login = () => {
     const [otp, setOtp] = useState('')
     const [step, setStep] = useState<'email' | 'otp'>('email')
 
+    const navigate = useNavigate();
+
     const [sendOtp, { isLoading: isSending }] = useSendOtpMutation();
     const [confirmOtp, {isLoading: isVerifying }] = useConfirmOtpMutation();
+
+    useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    // Если уже авторизован - редирект на главную
+    if (accessToken) {
+      navigate('/admin')
+    }
+  }, [navigate]);
 
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -27,8 +38,9 @@ const Login = () => {
 
         try {
           const result = await confirmOtp({ email, otp }).unwrap()
-          localStorage.setItem('accessToken', result.access);
+          localStorage.setItem('accessToken', result.accessToken);
           console.log('Успешная авторизация:', result)
+          navigate('/admin');
           // Редирект на главную или сохранение токена
         } catch (err) {
           console.error('Неверный код:', err)
