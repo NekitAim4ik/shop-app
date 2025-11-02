@@ -37,11 +37,13 @@ authRouter.post('/api/v1/auth/confirm/', async (ctx: Context) => {
         const isValid = await verifyOtp(loginConfirmBody.email, loginConfirmBody.otp);
 
         if(isValid) {
-            const user = await prisma.user.create({
-                data: {
-                    email: loginConfirmBody.email
-                }
-            });
+            if (!prisma.user.findUnique({ where: {email: loginConfirmBody.email} })) {
+                const user = await prisma.user.create({
+                    data: {
+                        email: loginConfirmBody.email
+                    }
+                });
+            }
 
             const accessToken = generateAccessToken(loginConfirmBody.email);
             const refreshToken = generateRefreshToken(loginConfirmBody.email);
