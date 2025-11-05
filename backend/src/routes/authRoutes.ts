@@ -1,11 +1,12 @@
 import Router from '@koa/router';
 import type { Context } from 'koa';
 import sendOtp from '../services/mailService.js'
-import { generateAccessToken, generateRefreshToken } from '../services/jwtService.js';
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../services/jwtService.js';
 import generateOtp from '../services/cryptoService.js';
 import { storeOTP, verifyOtp, deleteOtp } from '../services/redisService.js';
 import type { ILoginBody, ILoginConfirmBody } from '../dto/IAuth.js';
 import prisma from '../prisma.js';
+import type { JwtPayload } from 'jsonwebtoken';
 
 const authRouter = new Router();
 
@@ -67,6 +68,40 @@ authRouter.post('/api/v1/auth/confirm/', async (ctx: Context) => {
         ctx.status = 500;
         ctx.body = { error: 'Ошибка верификации OTP' };
     }
+});
+
+authRouter.post('/api/v1/auth/refresh/', async (ctx: Context) => {
+    const refreshToken = ctx.cookies.get('refreshToken');
+
+    if (!refreshToken) {
+        ctx.status = 401;
+        ctx.body = { error: 'Refresh token not found' };
+        return;
+    }
+
+    try {
+        const decoded = verifyRefreshToken(refreshToken) as JwtPayload;
+        
+        const newAccessToken = generateAccessToken(decoded.email);
+
+        ctx.status = 200;
+        ctx.body = {
+            accessToken: newAccessToken
+        };
+    } catch (err) {
+        ctx.status = 401;
+        ctx.body = { error: 'Invalid refresh token' };
+    }
+});
+
+authRouter.post('/auth/logout/', async (ctx: Context) => {
+  
+    ctx.cookies.set('refreshToken', null, {
+        maxAge: 0
+    });
+
+    ctx.status = 200;
+    ctx.body = { message: 'Logged out successfully' };
 });
 
 export default authRouter;
