@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import './Home.css';
+import './Protected.css';
 
 const Protected = () => {
     const accessToken = localStorage.getItem('accessToken');
@@ -9,12 +9,17 @@ const Protected = () => {
     }
 
     return (
-        <div className="home-container">
-            <div className="home-content">
-                <h1>Защищенная страница</h1>
-                <p>Добро пожаловать в административную панель!</p>
+        <header className='header'>
+            <div className='header-container'>
+                <div className='logo'></div>
+
+                <div className='right-section'>
+                    <button className='orders'>orders</button>
+                    <button className='cart'>cart</button>
+                    <div className='profile'></div>
+                </div>
             </div>
-        </div>
+        </header>
     );
 };
 
