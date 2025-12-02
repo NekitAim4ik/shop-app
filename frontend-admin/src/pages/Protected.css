@@ -1,25 +1,54 @@
-.header {
-  background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
-  color: white;
-  padding: 0 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  margin: auto;
-  display: flex;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.header-container {
-  max-width: 1200px;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f7;
+  color: #333;
+  display: block;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
+  width: 100%;
 }
 
-.buttons {
-    justify-content: space-between;
-    display: flex;
+.category-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+  border-color: #007aff;
+  color: #007aff;
+}
+
+.category-btn.active {
+  background: #007aff;
+  color: white;
+  border-color: #007aff;
 }
