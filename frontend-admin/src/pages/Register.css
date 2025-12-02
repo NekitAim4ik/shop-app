@@ -51,3 +51,7 @@
   transition: all 0.2s;
   outline: none;
 }
+
+a:hover {
+  cursor: pointer;
+}

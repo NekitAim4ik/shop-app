@@ -88,7 +88,7 @@ export const api = createApi({
 
         sendOptReg: builder.mutation<ILoginResponseBody, IRegisterBody>({
             query: (credentials) => ({
-                url: '/auth/register/body/',
+                url: '/auth/register/',
                 method: 'POST',
                 body: credentials,
             })
