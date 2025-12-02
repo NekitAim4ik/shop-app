@@ -1,25 +1,41 @@
 import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import './Protected.css';
+import Header from './Header';
+import TemplateGrid from './TemplateGrid';
 
 const Protected = () => {
     const accessToken = localStorage.getItem('accessToken');
+
+    const [selectedCategory, setSelectedCategory] = useState('Все');
+
+    const categories = [
+    'Все', 'Образование', 'Услуги', 'Прием платежей', 'Товары', 'Универсальные'
+  ];
 
     if (!accessToken) {
         return <Navigate to="/login" replace />
     }
 
     return (
-        <header className='header'>
-            <div className='header-container'>
-                <div className='logo'></div>
-
-                <div className='right-section'>
-                    <button className='orders'>orders</button>
-                    <button className='cart'>cart</button>
-                    <div className='profile'></div>
-                </div>
-            </div>
-        </header>
+        <div className="app">
+      <Header />
+      <main className="main-content">
+        <div className="category-filters">
+          {categories.map(category => (
+            <button
+              key={category}
+              className={`category-btn ${selectedCategory === category ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        
+        <TemplateGrid selectedCategory={selectedCategory} />
+      </main>
+    </div>
     );
 };
 
