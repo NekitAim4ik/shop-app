@@ -14,3 +14,10 @@ export interface ILoginConfigmBody {
 export interface ILoginConfirmResponseBody {
     accessToken: string
 }
+
+export interface IRegisterBody {
+    sname: string,
+    name: string,
+    email: string,
+    password: string
+}

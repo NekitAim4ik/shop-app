@@ -4,7 +4,7 @@ import sendOtp from '../services/mailService.js'
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../services/jwtService.js';
 import generateOtp from '../services/cryptoService.js';
 import { storeOTP, verifyOtp, deleteOtp } from '../services/redisService.js';
-import type { ILoginBody, ILoginConfirmBody } from '../dto/IAuth.js';
+import type { ILoginBody, ILoginConfirmBody, IRegisterBody } from '../dto/IAuth.js';
 import prisma from '../prisma.js';
 import type { JwtPayload } from 'jsonwebtoken';
 
@@ -91,6 +91,23 @@ authRouter.post('/api/v1/auth/refresh/', async (ctx: Context) => {
     } catch (err) {
         ctx.status = 401;
         ctx.body = { error: 'Invalid refresh token' };
+    }
+});
+
+authRouter.post('/api/v1/auth/register/', async (ctx: Context) => {
+    const registerBody = ctx.request.body as IRegisterBody;
+
+    const otp = generateOtp().toString();
+    
+    try {
+        await storeOTP(registerBody.email, otp);
+        await sendOtp(registerBody.email, otp);
+
+        ctx.body = { message: `Отправлено письмо ${registerBody.email}` };
+    } catch (error) {
+        console.log(error);
+        ctx.status = 500;
+        ctx.body = { error: 'Ошибка отправки' };
     }
 });
 

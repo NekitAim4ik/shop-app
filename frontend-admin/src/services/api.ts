@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { ILoginBody, ILoginResponseBody, ILoginConfigmBody, ILoginConfirmResponseBody } from "../dto/IAuth";
+import { type ILoginBody, type ILoginResponseBody, type ILoginConfigmBody, type ILoginConfirmResponseBody, type IRegisterBody } from "../dto/IAuth";
 import { Mutex } from "async-mutex";
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
@@ -86,10 +86,18 @@ export const api = createApi({
             }),
         }),
 
+        sendOptReg: builder.mutation<ILoginResponseBody, IRegisterBody>({
+            query: (credentials) => ({
+                url: '/auth/register/',
+                method: 'POST',
+                body: credentials,
+            })
+        }),
     }),
 });
 
 export const {
     useSendOtpMutation,
-    useConfirmOtpMutation
+    useConfirmOtpMutation,
+    useSendOptRegMutation
 } = api;

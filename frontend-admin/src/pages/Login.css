@@ -118,3 +118,7 @@
   background: #667eea;
   color: white;
 }
+
+a:hover {
+  cursor: pointer;
+}

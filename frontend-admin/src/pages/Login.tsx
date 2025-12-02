@@ -52,6 +52,10 @@ const Login = () => {
         setOtp('')
     };
 
+    const handleRegister = () => {
+      navigate('/register');
+    };
+
     return (
     <div className="login-container">
       <div className="login-card">
@@ -132,6 +136,9 @@ const Login = () => {
             </form>
           </>
         )}
+        <p className="login-subtitle">
+          Нет аккаунта? <a onClick={handleRegister}>Зарегистрируйтесь!</a>
+        </p>
       </div>
     </div>
   );
