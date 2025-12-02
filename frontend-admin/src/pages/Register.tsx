@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
+import { useSendOptRegMutation, useConfirmOtpMutation } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
@@ -12,8 +13,8 @@ const Register = () => {
 
     const [step, setStep] = useState<'email' | 'otp'>('email');
 
-    const [isSending, setIsSending] = useState(false);
-    const [isVerifying, setIsVerifying] = useState(false);
+    const [sendOtp, { isLoading: isSending }] = useSendOptRegMutation();
+    const [confirmOtp, {isLoading: isVerifying }] = useConfirmOtpMutation();
 
     const navigate = useNavigate();
 
@@ -25,8 +26,34 @@ const Register = () => {
         }
       }, [navigate]);
 
-    const handleSubmit = () => {
-        setStep('otp');
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            await sendOtp({
+                sname,
+                name,
+                email,
+                password
+            }).unwrap();
+
+            setStep('otp');
+        } catch (err) {
+            console.error('Ошибка отправки OTP:', err);
+        }
+    };
+
+    const handleVerifyOtp = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            const result = await confirmOtp({ email, otp }).unwrap();
+            localStorage.setItem('accessToken', result.accessToken);
+            console.log('Успешная регистрация:', result);
+            navigate('/admin');
+        } catch (err) {
+            console.error('Неверный код:', err);
+        }
     };
 
     const handleChangeEmail = () => {
@@ -109,7 +136,7 @@ const Register = () => {
                             Введите код, отправленный на <strong>{email}</strong>
                         </p>
 
-                        <form className="register-form">
+                        <form onSubmit={handleVerifyOtp} className="register-form">
                             <div className="form-group">
                                 <label htmlFor="otp" className="form-label">Код подтверждения</label>
                                 <input
