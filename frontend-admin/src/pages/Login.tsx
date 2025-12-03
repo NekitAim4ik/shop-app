@@ -7,6 +7,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('')
     const [step, setStep] = useState<'email' | 'otp'>('email')
+    const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const Login = () => {
         e.preventDefault()
 
         try {
-          await sendOtp({ email }).unwrap()
+          await sendOtp({ email, password }).unwrap()
           setStep('otp')  // Переключаемся на шаг ввода OTP
         } catch (err) {
           console.error('Ошибка отправки OTP:', err)
@@ -70,13 +71,22 @@ const Login = () => {
             
             <form onSubmit={handleSubmit} className="login-form">
               <div className="form-group">
-                <label htmlFor="email" className="form-label">Email</label>
                 <input
                   type="email"
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@example.com"
+                  className="form-input"
+                  required
+                  autoFocus
+                />
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Пароль"
                   className="form-input"
                   required
                   autoFocus

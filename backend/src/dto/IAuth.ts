@@ -1,5 +1,6 @@
 export interface ILoginBody {
     email: string
+    password: string
 }
 
 export interface ILoginConfirmBody {
@@ -8,6 +9,13 @@ export interface ILoginConfirmBody {
 }
 
 export interface IRegisterBody {
+    sname: string
+    name: string
+    email: string
+    password: string
+}
+
+export interface User {
     sname: string
     name: string
     email: string

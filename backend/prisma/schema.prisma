@@ -18,6 +18,8 @@ model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String?
+  sname     String?
+  password  String   @db.VarChar(255)
   createdAt DateTime @default(now())
 }
 

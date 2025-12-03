@@ -2,11 +2,12 @@ import Router from '@koa/router';
 import type { Context } from 'koa';
 import sendOtp from '../services/mailService.js'
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../services/jwtService.js';
-import generateOtp from '../services/cryptoService.js';
-import { storeOTP, verifyOtp, deleteOtp } from '../services/redisService.js';
+import generateOtp, { hashPassword, verifyPassword } from '../services/cryptoService.js';
+import { storeOTP, verifyOtp, deleteOtp, storeUser, getUser, storePass, getPass, deletePending } from '../services/redisService.js';
 import type { ILoginBody, ILoginConfirmBody, IRegisterBody } from '../dto/IAuth.js';
 import prisma from '../prisma.js';
 import type { JwtPayload } from 'jsonwebtoken';
+import type { User } from '../dto/IAuth.js';
 
 const authRouter = new Router();
 
@@ -21,6 +22,7 @@ authRouter.post('/api/v1/auth/login/', async (ctx: Context) => {
 
     try {
         await storeOTP(loginBody.email, otp);
+        await storePass(loginBody.email, loginBody.password);
         await sendOtp(loginBody.email, otp);
 
         ctx.body = { message: `Отправлено письмо ${loginBody.email}` };
@@ -38,18 +40,44 @@ authRouter.post('/api/v1/auth/confirm/', async (ctx: Context) => {
         const isValid = await verifyOtp(loginConfirmBody.email, loginConfirmBody.otp);
 
         if(isValid) {
-            if (!prisma.user.findUnique({ where: {email: loginConfirmBody.email} })) {
+            const user = await prisma.user.findUnique({ where: {email: loginConfirmBody.email }});
+
+            if (!user) {
+
+                const pendingData = await getUser(loginConfirmBody.email);
+                if (!pendingData) {
+                    ctx.status = 410; // Gone
+                    ctx.body = { error: 'Сессия истекла' };
+                    return;
+                }
+
+                const newUser = JSON.parse(pendingData);
+                const password = await hashPassword(newUser.password);
+
                 const user = await prisma.user.create({
                     data: {
-                        email: loginConfirmBody.email
+                        email: newUser.email,
+                        name: newUser.name,
+                        sname: newUser.sname,
+                        password: password
                     }
                 });
+            } else {
+                const password = await getPass(loginConfirmBody.email);
+
+                const isValPass = await verifyPassword(password!, user!.password);
+                if (!isValPass) {
+                    ctx.status = 401;
+                    ctx.body = { error: 'Неверный email или пароль' };
+                    return;
+                }
             }
 
             const accessToken = generateAccessToken(loginConfirmBody.email);
             const refreshToken = generateRefreshToken(loginConfirmBody.email);
 
             await deleteOtp(loginConfirmBody.email);
+            await deletePending(loginConfirmBody.email);
 
             ctx.cookies.set('refreshToken', refreshToken, {
                 httpOnly: true,
@@ -101,6 +129,7 @@ authRouter.post('/api/v1/auth/register/', async (ctx: Context) => {
     
     try {
         await storeOTP(registerBody.email, otp);
+        await storeUser(registerBody as User);
         await sendOtp(registerBody.email, otp);
 
         ctx.body = { message: `Отправлено письмо ${registerBody.email}` };
