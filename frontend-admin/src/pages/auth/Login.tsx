@@ -1,5 +1,5 @@
 import { useState, type FormEvent, useEffect } from "react";
-import { useSendOtpMutation, useConfirmOtpMutation } from "../services/api";
+import { useSendOtpMutation, useConfirmOtpMutation } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import './Login.css';
 
