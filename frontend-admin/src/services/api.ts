@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { type ILoginBody, type ILoginResponseBody, type ILoginConfigmBody, type ILoginConfirmResponseBody, type IRegisterBody } from "../dto/IAuth";
 import { Mutex } from "async-mutex";
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import type { IUserProfile } from "../dto/IProfile";
 
 const mutex = new Mutex();
 
@@ -93,11 +94,19 @@ export const api = createApi({
                 body: credentials,
             })
         }),
+
+        getUserProfile: builder.query<IUserProfile, void>({
+            query: () => ({
+                url: '/profile/', 
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
 export const {
     useSendOtpMutation,
     useConfirmOtpMutation,
-    useSendOptRegMutation
+    useSendOptRegMutation,
+    useGetUserProfileQuery
 } = api;
