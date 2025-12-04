@@ -21,8 +21,22 @@ authRouter.post('/api/v1/auth/login/', async (ctx: Context) => {
     const otp = generateOtp().toString();
 
     try {
+        const user = await prisma.user.findUnique({ where: {email: loginBody.email }}); 
+        if(!user) {
+            ctx.status = 401;
+            ctx.body = { error: 'Пользователь не найден' };
+            return;
+        }
+
+        const isValPass = await verifyPassword(loginBody.password, user.password);
+
+        if (!isValPass) {
+            ctx.status = 401;
+            ctx.body = { error: 'Неверный email или пароль' };
+            return;
+        }
+
         await storeOTP(loginBody.email, otp);
-        await storePass(loginBody.email, loginBody.password);
         await sendOtp(loginBody.email, otp);
 
         ctx.body = { message: `Отправлено письмо ${loginBody.email}` };
@@ -62,15 +76,6 @@ authRouter.post('/api/v1/auth/confirm/', async (ctx: Context) => {
                         password: password
                     }
                 });
-            } else {
-                const password = await getPass(loginConfirmBody.email);
-
-                const isValPass = await verifyPassword(password!, user!.password);
-                if (!isValPass) {
-                    ctx.status = 401;
-                    ctx.body = { error: 'Неверный email или пароль' };
-                    return;
-                }
             }
 
             const accessToken = generateAccessToken(loginConfirmBody.email);
