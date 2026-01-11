@@ -1,52 +1,41 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
 const Header: React.FC = () => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [logo, setLogo] = useState<string>('Конструктор сайтов');
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleLogoClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setLogo(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    navigate('/login');
   };
 
   return (
     <header className="header">
       <div className="header-left">
-        <div 
-          className="logo-container" 
-          onClick={handleLogoClick}
-          title="Кликните для загрузки логотипа"
-        >
-          {logo && typeof logo === 'string' && logo.startsWith('data:image') ? (
-            <img src={logo} alt="Логотип" className="logo-image" />
-          ) : (
-            <div className="logo-text">{logo}</div>
-          )}
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileUpload}
-            accept="image/*"
-            style={{ display: 'none' }}
-          />
-        </div>
+        <div className="logo-text">Конструктор</div>
       </div>
-      
+
+      <nav className="header-nav">
+        <button
+          className={`nav-link ${location.pathname === '/protected' ? 'active' : ''}`}
+          onClick={() => navigate('/protected')}
+        >
+          Новый сайт
+        </button>
+        <button
+          className={`nav-link ${location.pathname === '/protected/my-sites' ? 'active' : ''}`}
+          onClick={() => navigate('/protected/my-sites')}
+        >
+          Мои сайты
+        </button>
+      </nav>
+
       <div className="header-right">
-        <button className="header-btn">Заказы</button>
-        <button className="header-btn">Корзина</button>
-        <div className="profile">Профиль</div>
+        <button className="logout-btn" onClick={handleLogout}>
+          Выход
+        </button>
       </div>
     </header>
   );
